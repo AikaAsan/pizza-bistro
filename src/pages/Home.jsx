@@ -1,24 +1,31 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setSortOption } from '../redux/slices/filterSlice';
+import { useNavigate } from 'react-router-dom';
+import {
+    setCategoryId,
+    setSortOption,
+    setFilters,
+} from '../redux/slices/filterSlice';
+import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import qs from 'qs';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import ActiveSortOptionContext from '../store/ActiveSortOptionContext';
-// import SearchValueContext from '../store/SearchValueContext';
 import Pagination from '../components/Pagination/Pagination';
 
 const Home = () => {
-    const [pizzas, setPizzas] = useState([]);
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
     const { categoryId, sortOption, currentPage } = useSelector(
         (state) => state.filter
     );
     const { searchValue } = useSelector((state) => state.search);
+    const { pizzas, status } = useSelector((state) => state.pizza);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isSearch = useRef(false);
+    const isMounted = useRef(false);
 
     const renderedItems = pizzas
         .filter((obj) => {
@@ -33,43 +40,54 @@ const Home = () => {
     const skeletons = [...Array(6)].map((_, index) => <Skeleton key={index} />);
 
     const category = categoryId > 0 ? `category=${categoryId}` : '';
-    const search = searchValue > 0 ? `search=${searchValue}` : '';
+    const search = searchValue.length > 0 ? `&search=${searchValue}` : '';
 
     const categoryIdHandler = (index) => {
         dispatch(setCategoryId(index));
     };
 
     const sortOptionHandler = (sortProperty) => {
-        // setSortOption(sortProperty);
         dispatch(setSortOption(sortProperty));
-        console.log('sortProperty:', sortProperty);
     };
 
     const fetchPizzaHandler = async () => {
-        setIsLoading(true);
-        try {
-            const url = `https://632c9d085568d3cad8897bbb.mockapi.io/items?${category}&sortBy=${sortOption}&${search}&page=${currentPage}&limit=3`;
+        dispatch(fetchPizzas({ category, sortOption, search, currentPage }));
 
-            const response = await fetch(url);
-
-            if (!response.ok) {
-                throw new Error('Something went wrong');
-            }
-            const data = await response.json();
-
-            if (data) {
-                setPizzas(data);
-                // setTotalPages(Math.ceil(data.length / 3));
-            }
-        } catch (error) {
-            setError(error);
-        }
-        setIsLoading(false);
-    };
-    useEffect(() => {
-        fetchPizzaHandler();
         window.scrollTo(0, 0);
+    };
+
+    // if dependecies changed and there was first render
+    useEffect(() => {
+        if (isMounted.current) {
+            const queryString = qs.stringify({
+                categoryId: categoryId,
+                sortOption: sortOption,
+                currentPage,
+            });
+            navigate(`?${queryString}`);
+        }
+        isMounted.current = true;
+    }, [categoryId, sortOption, currentPage]);
+
+    // if first render -> we check URL parameters and save them in Redux state
+    useEffect(() => {
+        if (window.location.search) {
+            const params = qs.parse(window.location.search.substring(1));
+
+            dispatch(setFilters({ ...params })); //why I have to do spread
+
+            isSearch.current = true;
+        }
+    }, []);
+
+    // if first render -> fetch pizzas
+    useEffect(() => {
+        if (!isSearch.current) {
+            fetchPizzaHandler();
+        }
+        isSearch.current = false;
     }, [categoryId, sortOption, searchValue, currentPage]);
+
     return (
         <div className='container'>
             <div className='content__top'>
@@ -86,9 +104,15 @@ const Home = () => {
                 </ActiveSortOptionContext.Provider>
             </div>
             <h2 className='content__title'>All Pizzas</h2>
-            <div className='content__items'>
-                {isLoading ? skeletons : renderedItems}
-            </div>
+            {status === 'error' ? (
+                <div className='content__error-info'>
+                    <h2>Uh-Oh! Something went wrong😕</h2>
+                </div>
+            ) : (
+                <div className='content__items'>
+                    {status === 'loading' ? skeletons : renderedItems}
+                </div>
+            )}
             <Pagination />
         </div>
     );

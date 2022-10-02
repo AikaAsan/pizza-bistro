@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from '../../redux/slices/cartSlice';
 
-const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
-    const [pizzaCount, setPizzaCount] = useState(0);
+const crustTypes = ['Thin Crust', 'Original'];
+
+const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
     const [activeCrustType, setActiveCrustType] = useState(0);
     const [activeCrustSize, setActiveCrustSize] = useState(0);
-    const crustTypes = ['Thin Crust', 'Original'];
-    const onClickCounter = () => {
-        setPizzaCount((pizzaCount) => pizzaCount + 1);
+
+    const cartItem = useSelector((state) =>
+        state.cart.items.find((obj) => obj.id === id)
+    );
+
+    const addedCount = cartItem ? cartItem.count : 0;
+    const dispatch = useDispatch();
+
+    const onClickHandler = () => {
+        // setPizzaCount((pizzaCount) => pizzaCount + 1);
+        const item = {
+            id,
+            title,
+            price,
+            imageUrl,
+            size: sizes[activeCrustSize],
+            crustType: crustTypes[activeCrustType],
+        };
+        dispatch(addItem(item));
     };
-    // const onClickIndexHandler = (type) => {
-    //     setActiveIndex(type);
-    // };
+
     return (
         <div className='pizza-block-wrapper'>
             {' '}
@@ -38,8 +55,6 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
                                 </li>
                             );
                         })}
-                        {/* <li className='active'>Thin Crust</li>
-                    <li>Original</li> */}
                     </ul>
                     <ul>
                         {sizes.map((size, index) => {
@@ -62,7 +77,7 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
                 <div className='pizza-block__bottom'>
                     <div className='pizza-block__price'>{price}CAD</div>
                     <button
-                        onClick={onClickCounter}
+                        onClick={onClickHandler}
                         className='button button--outline button--add'
                     >
                         <svg
@@ -77,8 +92,8 @@ const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
                                 fill='white'
                             />
                         </svg>
-                        <span>Добавить</span>
-                        <i>{pizzaCount}</i>
+                        <span>Add</span>
+                        {addedCount > 0 && <i>{addedCount}</i>}
                     </button>
                 </div>
             </div>

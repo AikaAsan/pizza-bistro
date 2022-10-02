@@ -23,7 +23,6 @@ const Search = () => {
         []
     );
 
-    console.log('search value', searchValue);
     const clearSearch = () => {
         inputElementRef.current.value = '';
         dispatch(setSearchValue(''));

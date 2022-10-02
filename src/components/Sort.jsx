@@ -1,7 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortOption } from '../redux/slices/filterSlice';
-import ActiveSortOptionContext from '../store/ActiveSortOptionContext';
 
 function Sort() {
     const sortOptions = ['rating', 'price', 'title'];
@@ -9,8 +8,8 @@ function Sort() {
     const [isOpen, setIsOpen] = useState(false);
 
     const sortOption = useSelector((state) => state.filter.sortOption);
-
     const dispatch = useDispatch();
+    const sortElementRef = useRef();
 
     const selectedSortOption = sortOptions.find(
         (option) => option === sortOption
@@ -20,9 +19,22 @@ function Sort() {
         dispatch(setSortOption(sortProperty));
         setIsOpen(false);
     };
-    console.log('sortOption in Sort:', sortOption);
+
+    useEffect(() => {
+        const clickOutsideHandler = (event) => {
+            if (!event.path.includes(sortElementRef.current)) {
+                setIsOpen(false);
+                console.log('click outside');
+            }
+        };
+        document.body.addEventListener('click', clickOutsideHandler);
+
+        return () =>
+            document.body.removeEventListener('click', clickOutsideHandler);
+    }, []);
+
     return (
-        <div className='sort'>
+        <div className='sort' ref={sortElementRef}>
             <div className='sort__label'>
                 <svg
                     width='10'
