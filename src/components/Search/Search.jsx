@@ -3,15 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/searchSlice';
 import debounce from 'lodash.debounce';
 import classes from './Search.module.scss';
-import SearchValueContext from '../../store/SearchValueContext.js';
 
 const Search = () => {
-    // const { searchValue, searchInputChangeHandler } =
-    //     useContext(SearchValueContext);
-    // console.log('searchValue:', searchValue);
-
     const { searchValue } = useSelector((state) => state.search);
-
+    console.log('searchValue:', searchValue);
     const inputElementRef = useRef(searchValue);
 
     const dispatch = useDispatch();
@@ -26,6 +21,7 @@ const Search = () => {
     const clearSearch = () => {
         inputElementRef.current.value = '';
         dispatch(setSearchValue(''));
+        inputElementRef.current.focus();
     };
     return (
         <div className={classes.root}>

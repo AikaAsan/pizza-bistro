@@ -5,6 +5,7 @@ import {
     setCategoryId,
     setSortOption,
     setFilters,
+    selectFilter,
 } from '../redux/slices/filterSlice';
 import { fetchPizzas } from '../redux/slices/pizzaSlice';
 import qs from 'qs';
@@ -16,9 +17,7 @@ import ActiveSortOptionContext from '../store/ActiveSortOptionContext';
 import Pagination from '../components/Pagination/Pagination';
 
 const Home = () => {
-    const { categoryId, sortOption, currentPage } = useSelector(
-        (state) => state.filter
-    );
+    const { categoryId, sortOption, currentPage } = useSelector(selectFilter);
     const { searchValue } = useSelector((state) => state.search);
     const { pizzas, status } = useSelector((state) => state.pizza);
 
