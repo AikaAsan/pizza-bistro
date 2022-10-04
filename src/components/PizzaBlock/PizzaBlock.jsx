@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addItem, selectCartItemById } from '../../redux/slices/cartSlice';
 
 const crustTypes = ['Thin Crust', 'Original'];
@@ -14,7 +15,6 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
     const dispatch = useDispatch();
 
     const onClickHandler = () => {
-        // setPizzaCount((pizzaCount) => pizzaCount + 1);
         const item = {
             id,
             title,
@@ -27,7 +27,7 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
     };
 
     return (
-        <div className='pizza-block-wrapper'>
+        <Link to={`/pizza/${id}`} className='pizza-block-wrapper'>
             {' '}
             <div className='pizza-block'>
                 <img
@@ -95,7 +95,7 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 
