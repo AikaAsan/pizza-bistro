@@ -2,15 +2,37 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
     addItem,
+    TCartItem,
     removeItem,
     decrementPizzaCount,
 } from '../../redux/slices/cartSlice';
 
-const CartItem = ({ id, title, price, imageUrl, size, crustType, count }) => {
+type CartItemProps = {
+    id: string;
+    title: string;
+    price: number;
+    imageUrl: string;
+    size: number;
+    crustType: string;
+    count: number;
+};
+const CartItemBlock: React.FC<CartItemProps> = ({
+    id,
+    title,
+    price,
+    imageUrl,
+    size,
+    crustType,
+    count,
+}) => {
     const dispatch = useDispatch();
 
     const addItemHandler = () => {
-        dispatch(addItem({ id }));
+        dispatch(
+            addItem({
+                id,
+            } as TCartItem)
+        );
     };
     const decrementCount = () => {
         dispatch(decrementPizzaCount(id));
@@ -112,4 +134,4 @@ const CartItem = ({ id, title, price, imageUrl, size, crustType, count }) => {
     );
 };
 
-export default CartItem;
+export default CartItemBlock;

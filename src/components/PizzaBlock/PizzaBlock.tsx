@@ -1,11 +1,30 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { addItem, selectCartItemById } from '../../redux/slices/cartSlice';
+import {
+    addItem,
+    TCartItem,
+    selectCartItemById,
+} from '../../redux/slices/cartSlice';
 
-const crustTypes = ['Thin Crust', 'Original'];
+type PizzaBlockProps = {
+    id: string;
+    title: string;
+    price: number;
+    imageUrl: string;
+    sizes: string[];
+    types: number[];
+};
+const crustTypes: string[] = ['Thin Crust', 'Original'];
 
-const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
+const PizzaBlock: React.FC<PizzaBlockProps> = ({
+    id,
+    title,
+    price,
+    imageUrl,
+    sizes,
+    types,
+}) => {
     const [activeCrustType, setActiveCrustType] = useState(0);
     const [activeCrustSize, setActiveCrustSize] = useState(0);
 
@@ -15,27 +34,29 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
     const dispatch = useDispatch();
 
     const onClickHandler = () => {
-        const item = {
+        const item: TCartItem = {
             id,
             title,
             price,
             imageUrl,
             size: sizes[activeCrustSize],
             crustType: crustTypes[activeCrustType],
+            count: 0,
         };
         dispatch(addItem(item));
     };
 
     return (
-        <Link to={`/pizza/${id}`} className='pizza-block-wrapper'>
-            {' '}
+        <div className='pizza-block-wrapper'>
             <div className='pizza-block'>
-                <img
-                    className='pizza-block__image'
-                    src={imageUrl}
-                    alt='Pizza'
-                />
-                <h4 className='pizza-block__title'>{title}</h4>
+                <Link to={`/pizza/${id}`}>
+                    <img
+                        className='pizza-block__image'
+                        src={imageUrl}
+                        alt='Pizza'
+                    />
+                    <h4 className='pizza-block__title'>{title}</h4>
+                </Link>
                 <div className='pizza-block__selector'>
                     <ul>
                         {types.map((type, index) => {
@@ -95,7 +116,7 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
                     </button>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 };
 

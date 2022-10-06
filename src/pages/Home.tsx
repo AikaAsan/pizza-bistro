@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate , Link} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
     setCategoryId,
     setSortOption,
     setFilters,
     selectFilter,
 } from '../redux/slices/filterSlice';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
 import qs from 'qs';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
@@ -15,25 +15,26 @@ import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 import ActiveSortOptionContext from '../store/ActiveSortOptionContext';
 import Pagination from '../components/Pagination/Pagination';
+import { useAppDispatch } from '../redux/store';
 
 const Home = () => {
     const { categoryId, sortOption, currentPage } = useSelector(selectFilter);
-    const { searchValue } = useSelector((state) => state.search);
-    const { pizzas, status } = useSelector((state) => state.pizza);
+    const { searchValue } = useSelector((state: any) => state.search);
+    const { pizzas, status } = useSelector(selectPizzaData);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const isSearch = useRef(false);
-    const isMounted = useRef(false);
+    const isSearch = useRef<boolean>(false);
+    const isMounted = useRef<boolean>(false);
 
     const renderedItems = pizzas
-        .filter((obj) => {
+        .filter((obj: any) => {
             if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
                 return true;
             }
             return false;
         })
-        .map((pizzaItem) => {
+        .map((pizzaItem: any) => {
             return <PizzaBlock {...pizzaItem} key={pizzaItem.id} />;
         });
     const skeletons = [...Array(6)].map((_, index) => <Skeleton key={index} />);
@@ -41,11 +42,11 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue.length > 0 ? `&search=${searchValue}` : '';
 
-    const categoryIdHandler = (index) => {
+    const categoryIdHandler = (index: number) => {
         dispatch(setCategoryId(index));
     };
 
-    const sortOptionHandler = (sortProperty) => {
+    const sortOptionHandler = (sortProperty: string) => {
         dispatch(setSortOption(sortProperty));
     };
 
@@ -73,7 +74,16 @@ const Home = () => {
         if (window.location.search) {
             const params = qs.parse(window.location.search.substring(1));
 
-            dispatch(setFilters({ ...params })); //why I have to do spread
+            dispatch(
+                setFilters({
+                    ...params,
+                    //maybe dont need it
+                    categoryId: 0,
+                    sortOption: '',
+                    currentPage: 0,
+                    searchValue: '',
+                })
+            ); //why I have to do spread
 
             isSearch.current = true;
         }
@@ -98,7 +108,10 @@ const Home = () => {
                         sortOptionHandler,
                     }}
                 >
-                    <Categories />
+                    <Categories
+                        categoryId={categoryId}
+                        categoryIdHandler={categoryIdHandler}
+                    />
                     <Sort />
                 </ActiveSortOptionContext.Provider>
             </div>

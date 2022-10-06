@@ -3,8 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
-const FullPizza = () => {
-    const [pizzaItem, setPizzaItem] = useState({});
+const FullPizza: React.FC = () => {
+    const [pizzaItem, setPizzaItem] = useState<{
+        imageUrl: string;
+        title: string;
+        price: number;
+    }>();
     const params = useParams();
     const { id } = params;
     const navigate = useNavigate();
@@ -25,13 +29,13 @@ const FullPizza = () => {
     }, [id]);
 
     if (!pizzaItem) {
-        return 'Loading...';
+        return <>'Loading...'</>;
     }
 
     return (
         <div className='container'>
             {' '}
-            <img src={pizzaItem.imageUrl} />
+            <img src={pizzaItem.imageUrl} alt={pizzaItem.title} />
             <h2>{pizzaItem.title} pizza</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.

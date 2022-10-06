@@ -1,27 +1,38 @@
-import React, { useContext, useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/searchSlice';
 import debounce from 'lodash.debounce';
 import classes from './Search.module.scss';
 
-const Search = () => {
-    const { searchValue } = useSelector((state) => state.search);
-    console.log('searchValue:', searchValue);
-    const inputElementRef = useRef(searchValue);
+const Search: React.FC = () => {
+    // const { searchValue } = useSelector(
+    //     (state: { search: { searchValue: string } }) => state.search
+    // );
+
+    // const inputElementRef = useRef(searchValue);
+
+    const [value, setValue] = useState<string>('');
+
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const dispatch = useDispatch();
 
     const searchInputChangeHandler = useCallback(
-        debounce((event) => {
-            dispatch(setSearchValue(event.target.value));
+        debounce((str: string) => {
+            dispatch(setSearchValue(str));
         }, 1000),
         []
     );
 
+    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('event.target.value', event.target.value);
+        setValue(event.target.value);
+        searchInputChangeHandler(event.target.value);
+    };
     const clearSearch = () => {
-        inputElementRef.current.value = '';
         dispatch(setSearchValue(''));
-        inputElementRef.current.focus();
+        setValue('');
+        inputRef.current?.focus();
     };
     return (
         <div className={classes.root}>
@@ -38,10 +49,11 @@ const Search = () => {
 
             <input
                 className={classes.input}
-                ref={inputElementRef}
+                value={value}
+                ref={inputRef}
                 type='text'
                 placeholder='Search pizza'
-                onChange={searchInputChangeHandler}
+                onChange={onChangeInput}
             />
 
             <svg

@@ -2,27 +2,34 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSortOption } from '../redux/slices/filterSlice';
 import { selectSort } from '../redux/slices/filterSlice';
-function Sort() {
-    const sortOptions = ['rating', 'price', 'title'];
 
-    const [isOpen, setIsOpen] = useState(false);
+type PopupClick = MouseEvent & {
+    path: Node[];
+};
+
+const Sort: React.FC = () => {
+    const sortOptions: string[] = ['rating', 'price', 'title'];
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const sortOption = useSelector(selectSort);
+
     const dispatch = useDispatch();
-    const sortElementRef = useRef();
+    const sortElementRef = useRef<HTMLDivElement>(null);
 
-    const selectedSortOption = sortOptions.find(
-        (option) => option === sortOption
-    );
-
-    const onClickSortOption = (sortProperty) => {
+    console.log('IsOpen:', isOpen);
+    const onClickSortOption = (sortProperty: string) => {
         dispatch(setSortOption(sortProperty));
         setIsOpen(false);
     };
 
     useEffect(() => {
-        const clickOutsideHandler = (event) => {
-            if (!event.path.includes(sortElementRef.current)) {
+        const clickOutsideHandler = (event: MouseEvent) => {
+            const _event = event as PopupClick;
+            if (
+                sortElementRef.current &&
+                !_event.path.includes(sortElementRef.current)
+            ) {
                 setIsOpen(false);
                 console.log('click outside');
             }
@@ -49,8 +56,12 @@ function Sort() {
                     />
                 </svg>
                 <b>Sort by:</b>
-                <span onClick={() => setIsOpen(!isOpen)}>
-                    {selectedSortOption}
+                <span
+                    onClick={() => {
+                        return setIsOpen(!isOpen);
+                    }}
+                >
+                    {sortOption}
                 </span>
             </div>
             {isOpen && (
@@ -76,6 +87,6 @@ function Sort() {
             )}
         </div>
     );
-}
+};
 
 export default Sort;

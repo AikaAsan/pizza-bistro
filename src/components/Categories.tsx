@@ -1,19 +1,27 @@
 import React, { useContext } from 'react';
-import ActiveSortOptionContext from '../store/ActiveSortOptionContext';
-function Categories() {
+
+type CategoriesProps = {
+    categoryId: number;
+    categoryIdHandler: (index: number) => void;
+};
+
+const Categories: React.FC<CategoriesProps> = ({
+    categoryId,
+    categoryIdHandler,
+}) => {
     const categories = ['All', 'Meat', 'Veggie'];
 
-    const { categoryId, categoryIdHandler } = useContext(
-        ActiveSortOptionContext
-    );
 
-    const onClickHandler = (index) => {
+    console.log('categoryId', categoryId);
+
+
+    const onClickHandler = (index: number) => {
         categoryIdHandler(index);
     };
     return (
         <div className='categories'>
             <ul>
-                {categories.map((category, index) => {
+                {categories.map((category, index: number) => {
                     return (
                         <li
                             key={index}
@@ -27,6 +35,6 @@ function Categories() {
             </ul>
         </div>
     );
-}
+};
 
 export default Categories;

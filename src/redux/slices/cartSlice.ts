@@ -1,6 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
-const initialState = {
+export type TCartItem = {
+    id: string;
+    title: string;
+    price: number;
+    imageUrl: string;
+    size: string;
+    crustType: string;
+    count: number;
+};
+
+interface cartSliceState {
+    totalPrice: number;
+    items: TCartItem[];
+    totalCount: 0;
+}
+
+const initialState: cartSliceState = {
     totalPrice: 0,
     items: [],
     totalCount: 0,
@@ -9,7 +26,7 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-        addItem: (state, action) => {
+        addItem: (state, action: PayloadAction<TCartItem>) => {
             const findItem = state.items.find(
                 (obj) => obj.id === action.payload.id
             );
@@ -23,7 +40,7 @@ export const cartSlice = createSlice({
                 return obj.price * obj.count + sum;
             }, 0);
         },
-        removeItem: (state, action) => {
+        removeItem: (state, action: PayloadAction<string>) => {
             state.items = state.items.filter(
                 (item) => item.id !== action.payload
             );
@@ -31,7 +48,7 @@ export const cartSlice = createSlice({
                 return obj.price * obj.count + sum;
             }, 0);
         },
-        decrementPizzaCount: (state, action) => {
+        decrementPizzaCount: (state, action: PayloadAction<string>) => {
             const findItem = state.items.find(
                 (obj) => obj.id === action.payload
             );
@@ -57,8 +74,8 @@ export const cartSlice = createSlice({
         // },
     },
 });
-export const selectCart = (state) => state.cart;
-export const selectCartItemById = (id) => (state) =>
+export const selectCart = (state: RootState) => state.cart;
+export const selectCartItemById = (id: string) => (state: RootState) =>
     state.cart.items.find((obj) => obj.id === id);
 
 export const { addItem, removeItem, clearItems, decrementPizzaCount } =
