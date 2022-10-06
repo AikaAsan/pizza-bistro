@@ -6,6 +6,7 @@ import {
     removeItem,
     decrementPizzaCount,
 } from '../../redux/slices/cartSlice';
+import clsx from 'clsx';
 
 type CartItemProps = {
     id: string;
@@ -35,7 +36,15 @@ const CartItemBlock: React.FC<CartItemProps> = ({
         );
     };
     const decrementCount = () => {
-        dispatch(decrementPizzaCount(id));
+        if (count > 1) {
+            dispatch(decrementPizzaCount(id));
+        }
+        if (
+            count === 1 &&
+            window.confirm('Are you sure you want to remove this item? ')
+        ) {
+            dispatch(removeItem(id));
+        }
     };
 
     const removeItemHandler = () => {
@@ -61,7 +70,10 @@ const CartItemBlock: React.FC<CartItemProps> = ({
             </div>
             <div className='cart__item-count'>
                 <button
-                    className='button button--outline button--circle cart__item-count-minus'
+                    className={clsx(
+                        'button button--outline button--circle cart__item-count-minus',
+                        { 'cart__item-count-minus--disabled': count === 1 }
+                    )}
                     onClick={decrementCount}
                 >
                     <svg

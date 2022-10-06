@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useEffect, useRef, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
     setCategoryId,
     setSortOption,
@@ -19,6 +19,7 @@ import { useAppDispatch } from '../redux/store';
 
 const Home = () => {
     const { categoryId, sortOption, currentPage } = useSelector(selectFilter);
+
     const { searchValue } = useSelector((state: any) => state.search);
     const { pizzas, status } = useSelector(selectPizzaData);
 
@@ -42,9 +43,9 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue.length > 0 ? `&search=${searchValue}` : '';
 
-    const categoryIdHandler = (index: number) => {
+    const categoryIdHandler = useCallback((index: number) => {
         dispatch(setCategoryId(index));
-    };
+    }, []);
 
     const sortOptionHandler = (sortProperty: string) => {
         dispatch(setSortOption(sortProperty));
@@ -112,7 +113,7 @@ const Home = () => {
                         categoryId={categoryId}
                         categoryIdHandler={categoryIdHandler}
                     />
-                    <Sort />
+                    <Sort sortOption={sortOption} />
                 </ActiveSortOptionContext.Provider>
             </div>
             <h2 className='content__title'>All Pizzas</h2>
