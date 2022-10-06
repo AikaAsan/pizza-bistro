@@ -63,15 +63,6 @@ export const cartSlice = createSlice({
             state.items = [];
             state.totalPrice = 0;
         },
-
-        // totalCount
-
-        // calculateTotalCount: (state, action) => {
-        //     state.totalCount = state.items.reduce(
-        //         (sum, item) => sum + item.count,
-        //         0
-        //     );
-        // },
     },
 });
 export const selectCart = (state: RootState) => state.cart;

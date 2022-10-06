@@ -1,19 +1,35 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import pizzaLogo from '../assets/img/pizza-logo.svg';
 import cartSvg from '../assets/img/cart.svg';
 import Search from './Search/Search';
 import { selectCart } from '../redux/slices/cartSlice';
+
 const Header: React.FC = () => {
     const { totalPrice, items } = useSelector(selectCart);
-
+    console.log('totalPrice:', totalPrice);
     const { pathname } = useLocation();
+    const dispatch = useDispatch();
+
+    const isMounted = useRef(false);
 
     const totalCount = items.reduce(
         (sum: number, item: { count: number }) => sum + item.count,
         0
     );
+    console.log('items:', items);
+    // console.log(JSON.stringify(items));
+
+    useEffect(() => {
+        console.log('use Effect in Header worked');
+        if (isMounted.current) {
+            const json = JSON.stringify(items);
+            localStorage.setItem('items', json);
+        }
+        isMounted.current = true;
+    }, [items]);
+
     return (
         <div className='header'>
             <div className='container'>
