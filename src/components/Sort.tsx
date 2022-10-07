@@ -9,7 +9,7 @@ type PopupClick = MouseEvent & {
 type SortProps = {
     sortOption: string;
 };
-const Sort: React.FC<SortProps> = React.memo(({ sortOption }) => {
+export const Sort: React.FC<SortProps> = React.memo(({ sortOption }) => {
     const sortOptions: string[] = ['rating', 'price', 'title'];
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -88,5 +88,3 @@ const Sort: React.FC<SortProps> = React.memo(({ sortOption }) => {
         </div>
     );
 });
-
-export default Sort;

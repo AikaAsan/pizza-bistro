@@ -1,16 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import pizzaLogo from '../assets/img/pizza-logo.svg';
 import cartSvg from '../assets/img/cart.svg';
-import Search from './Search/Search';
+import { Search } from '../components';
 import { selectCart } from '../redux/slices/cartSlice';
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     const { totalPrice, items } = useSelector(selectCart);
-    console.log('totalPrice:', totalPrice);
+
     const { pathname } = useLocation();
-    const dispatch = useDispatch();
 
     const isMounted = useRef(false);
 
@@ -18,14 +17,13 @@ const Header: React.FC = () => {
         (sum: number, item: { count: number }) => sum + item.count,
         0
     );
-    console.log('items:', items);
-    // console.log(JSON.stringify(items));
 
     useEffect(() => {
         console.log('use Effect in Header worked');
         if (isMounted.current) {
             const json = JSON.stringify(items);
             localStorage.setItem('items', json);
+            console.log(';json:', json);
         }
         isMounted.current = true;
     }, [items]);
@@ -85,5 +83,3 @@ const Header: React.FC = () => {
         </div>
     );
 };
-
-export default Header;

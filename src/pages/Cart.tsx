@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CartItem from '../components/CartItem/CartItem';
-import EmptyCart from '../components/EmptyCart/EmptyCart';
+import { CartItem, EmptyCart } from '../components/index';
+
 import { clearItems, selectCart } from '../redux/slices/cartSlice';
 const Cart: React.FC = () => {
     const { totalPrice, items } = useSelector(selectCart);
@@ -95,7 +95,7 @@ const Cart: React.FC = () => {
                             />
                         </svg>
 
-                        <span>Очистить корзину</span>
+                        <span>Clear Basket</span>
                     </div>
                 </div>
                 <div className='content__items'>
@@ -121,7 +121,10 @@ const Cart: React.FC = () => {
                         </span>
                     </div>
                     <div className='cart__bottom-buttons'>
-                        <button className='button button--outline button--add go-back-btn'>
+                        <Link
+                            to='/'
+                            className='button button--outline button--add go-back-btn'
+                        >
                             <svg
                                 width='8'
                                 height='14'
@@ -138,8 +141,8 @@ const Cart: React.FC = () => {
                                 />
                             </svg>
 
-                            <Link to='/'>Go back</Link>
-                        </button>
+                            <span>Go back</span>
+                        </Link>
                         <div className='button pay-btn'>
                             <span>Check out</span>
                         </div>

@@ -5,7 +5,7 @@ type CategoriesProps = {
     categoryIdHandler: (index: number) => void;
 };
 
-const Categories: React.FC<CategoriesProps> = React.memo(
+export const Categories: React.FC<CategoriesProps> = React.memo(
     ({ categoryId, categoryIdHandler }) => {
         const categories = ['All', 'Meat', 'Veggie'];
 
@@ -31,5 +31,3 @@ const Categories: React.FC<CategoriesProps> = React.memo(
         );
     }
 );
-
-export default Categories;

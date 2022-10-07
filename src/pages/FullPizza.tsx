@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -11,8 +11,8 @@ const FullPizza: React.FC = () => {
     }>();
     const params = useParams();
     const { id } = params;
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     useEffect(() => {
         async function fetchPizzaItem() {
             try {
@@ -26,7 +26,7 @@ const FullPizza: React.FC = () => {
             }
         }
         fetchPizzaItem();
-    }, [id]);
+    }, [id, navigate]);
 
     if (!pizzaItem) {
         return <>'Loading...'</>;
@@ -43,6 +43,11 @@ const FullPizza: React.FC = () => {
                 distinctio odio sapiente voluptate!
             </p>{' '}
             <h4>{pizzaItem.price}CAD</h4>
+            <Link to='/'>
+                <button className='button button--outline button--add'>
+                    <span>Назад</span>
+                </button>
+            </Link>
         </div>
     );
 };

@@ -1,10 +1,10 @@
 import React, { useRef, useCallback, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/searchSlice';
 import debounce from 'lodash.debounce';
 import classes from './Search.module.scss';
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
     // const { searchValue } = useSelector(
     //     (state: { search: { searchValue: string } }) => state.search
     // );
@@ -35,10 +35,10 @@ const Search: React.FC = () => {
         inputRef.current?.focus();
     };
     return (
-        <div className={classes.root}>
+        <div className='search'>
             <svg
                 id='Layer_1'
-                className={classes.icon}
+                className='search__icon'
                 version='1.1'
                 viewBox='0 0 512 512'
                 width='512px'
@@ -48,7 +48,7 @@ const Search: React.FC = () => {
             </svg>
 
             <input
-                className={classes.input}
+                className='search__input'
                 value={value}
                 ref={inputRef}
                 type='text'
@@ -57,7 +57,7 @@ const Search: React.FC = () => {
             />
 
             <svg
-                className={classes.clearIcon}
+                className='search__clear-icon'
                 onClick={clearSearch}
                 viewBox='0 0 20 20'
                 xmlns='http://www.w3.org/2000/svg'
@@ -67,5 +67,3 @@ const Search: React.FC = () => {
         </div>
     );
 };
-
-export default Search;

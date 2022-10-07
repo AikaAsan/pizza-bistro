@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../redux/store';
+import qs from 'qs';
 import {
     setCategoryId,
     setSortOption,
@@ -8,14 +10,14 @@ import {
     selectFilter,
 } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
-import qs from 'qs';
-import Categories from '../components/Categories';
-import Sort from '../components/Sort';
-import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
-import Skeleton from '../components/PizzaBlock/Skeleton';
 import ActiveSortOptionContext from '../store/ActiveSortOptionContext';
-import Pagination from '../components/Pagination/Pagination';
-import { useAppDispatch } from '../redux/store';
+import {
+    Categories,
+    Sort,
+    PizzaBlock,
+    Skeleton,
+    Pagination,
+} from '../components';
 
 const Home = () => {
     const { categoryId, sortOption, currentPage } = useSelector(selectFilter);
@@ -43,19 +45,22 @@ const Home = () => {
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue.length > 0 ? `&search=${searchValue}` : '';
 
-    const categoryIdHandler = useCallback((index: number) => {
-        dispatch(setCategoryId(index));
-    }, []);
+    const categoryIdHandler = useCallback(
+        (index: number) => {
+            dispatch(setCategoryId(index));
+        },
+        [dispatch]
+    );
 
     const sortOptionHandler = (sortProperty: string) => {
         dispatch(setSortOption(sortProperty));
     };
 
-    const fetchPizzaHandler = async () => {
+    const fetchPizzaHandler = useCallback(async () => {
         dispatch(fetchPizzas({ category, sortOption, search, currentPage }));
 
         window.scrollTo(0, 0);
-    };
+    }, [category, currentPage, dispatch, search, sortOption]);
 
     // if dependecies changed and there was first render
     useEffect(() => {
@@ -68,7 +73,7 @@ const Home = () => {
             navigate(`?${queryString}`);
         }
         isMounted.current = true;
-    }, [categoryId, sortOption, currentPage]);
+    }, [categoryId, sortOption, currentPage, navigate]);
 
     // if first render -> we check URL parameters and save them in Redux state
     useEffect(() => {
@@ -88,7 +93,7 @@ const Home = () => {
 
             isSearch.current = true;
         }
-    }, []);
+    }, [dispatch]);
 
     // if first render -> fetch pizzas
     useEffect(() => {
@@ -96,7 +101,7 @@ const Home = () => {
             fetchPizzaHandler();
         }
         isSearch.current = false;
-    }, [categoryId, sortOption, searchValue, currentPage]);
+    }, [categoryId, sortOption, searchValue, currentPage, fetchPizzaHandler]);
 
     return (
         <div className='container'>

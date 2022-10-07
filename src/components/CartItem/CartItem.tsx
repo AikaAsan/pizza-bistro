@@ -17,7 +17,7 @@ type CartItemProps = {
     crustType: string;
     count: number;
 };
-const CartItemBlock: React.FC<CartItemProps> = ({
+export const CartItem: React.FC<CartItemProps> = ({
     id,
     title,
     price,
@@ -145,5 +145,3 @@ const CartItemBlock: React.FC<CartItemProps> = ({
         </div>
     );
 };
-
-export default CartItemBlock;
