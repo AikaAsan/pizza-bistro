@@ -13,6 +13,7 @@
     border: 1px solid #fe5f1e;
     cursor: pointer;
     border-radius: 30px;
+    padding-left: 14px;
     background-color: #fe5f1e;
 }
 .activeLink {
@@ -22,7 +23,6 @@
     border: 1px solid #fe5f1e;
     cursor: pointer;
     border-radius: 30px;
-    padding-left: 14px;
     background-color: #fe5f1e;
     color: #fff;
     &:hover {
