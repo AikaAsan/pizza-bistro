@@ -7,19 +7,12 @@ An application that fetches pizza data from mock API. Built with React, TypeScri
 Clone down this repository. You will need node and npm installed globally on your machine.
 
 Installation:
-
 npm install
 
-To Run Test Suite:
-
-npm test
-
 To Start Server:
-
 npm start
 
 To Visit App:
-
 localhost:3000/
 
 ## Reflection
@@ -38,4 +31,4 @@ At the end of the day, the technologies and practices implemented in this projec
 - responsive design. 
 
 
-Take a look at the [deployed version] (https://pizza-bistro.vercel.app/)
+Take a look at the [deployed version](https://pizza-bistro.vercel.app/)
