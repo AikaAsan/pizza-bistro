@@ -94,7 +94,7 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
                     </ul>
                 </div>
                 <div className='pizza-block__bottom'>
-                    <div className='pizza-block__price'>{price}CAD</div>
+                    <div className='pizza-block__price'> ${price}</div>
                     <button
                         onClick={onClickHandler}
                         className='button button--outline button--add'

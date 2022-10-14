@@ -117,7 +117,7 @@ const Cart: React.FC = () => {
                         </span>
                         <span>
                             {' '}
-                            Total: <b>{totalPrice} CAD</b>{' '}
+                            Total: <b> ${totalPrice}</b>{' '}
                         </span>
                     </div>
                     <div className='cart__bottom-buttons'>

@@ -17,7 +17,6 @@ export const Sort: React.FC<SortProps> = React.memo(({ sortOption }) => {
     const dispatch = useDispatch();
     const sortElementRef = useRef<HTMLDivElement>(null);
 
-    console.log('IsOpen:', isOpen);
     const onClickSortOption = (sortProperty: string) => {
         dispatch(setSortOption(sortProperty));
         setIsOpen(false);
@@ -31,7 +30,6 @@ export const Sort: React.FC<SortProps> = React.memo(({ sortOption }) => {
                 !_event.path.includes(sortElementRef.current)
             ) {
                 setIsOpen(false);
-                console.log('click outside');
             }
         };
         document.body.addEventListener('click', clickOutsideHandler);
@@ -44,8 +42,8 @@ export const Sort: React.FC<SortProps> = React.memo(({ sortOption }) => {
         <div className='sort' ref={sortElementRef}>
             <div className='sort__label'>
                 <svg
-                    width='10'
-                    height='6'
+                    width='20'
+                    height='10'
                     viewBox='0 0 10 6'
                     fill='none'
                     xmlns='http://www.w3.org/2000/svg'
@@ -55,7 +53,9 @@ export const Sort: React.FC<SortProps> = React.memo(({ sortOption }) => {
                         fill='#2C2C2C'
                     />
                 </svg>
-                <b>Sort by:</b>
+                <h3>
+                    <b>Sort by:</b>
+                </h3>
                 <span
                     onClick={() => {
                         return setIsOpen(!isOpen);

@@ -17,11 +17,12 @@ export const Pagination: React.FC = () => {
             onPageChange={(event) =>
                 dispatch(setCurrentPage(event.selected + 1))
             }
-            containerClassName={classes.container}
-            pageClassName={classes.page}
-            activeLinkClassName={classes.activeLink}
-            nextClassName={classes.navigation}
-            previousClassName={classes.navigation}
+            className={classes.root}
+            // containerClassName={classes.container}
+            // pageClassName={classes.page}
+            // activeLinkClassName={classes.activeLink}
+            // nextClassName={classes.navigation}
+            // previousClassName={classes.navigation}
         />
     );
 };

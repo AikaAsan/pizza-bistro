@@ -18,6 +18,7 @@
             color: $orange;
             border-bottom: 1px dashed $orange;
             cursor: pointer;
+            font-size: 20px;
         }
     }
 
@@ -37,13 +38,15 @@
             li {
                 padding: 12px 20px;
                 cursor: pointer;
-
+                font-size: 20px;
                 &.active,
                 &:hover {
                     background: rgba(254, 95, 30, 0.05);
+                    font-size: 20px;
                 }
 
                 &.active {
+                    font-size: 20px;
                     font-weight: bold;
                     color: $orange;
                 }

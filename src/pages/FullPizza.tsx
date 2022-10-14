@@ -33,7 +33,7 @@ const FullPizza: React.FC = () => {
     }
 
     return (
-        <div className='container'>
+        <div className='full-pizza'>
             {' '}
             <img src={pizzaItem.imageUrl} alt={pizzaItem.title} />
             <h2>{pizzaItem.title} pizza</h2>
@@ -42,7 +42,7 @@ const FullPizza: React.FC = () => {
                 Dolorum, quae quas labore assumenda fugit aperiam molestiae
                 distinctio odio sapiente voluptate!
             </p>{' '}
-            <h4>{pizzaItem.price}CAD</h4>
+            <h3>$ {pizzaItem.price}</h3>
             <Link to='/'>
                 <button className='button button--outline button--add'>
                     <span>Назад</span>

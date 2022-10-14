@@ -102,7 +102,23 @@ body {
         }
     }
 }
+.full-pizza {
+    // background-color: aquamarine;
+    width: 80%;
+    margin: auto;
+    text-align: center;
 
+    img {
+        display: block;
+        margin: auto;
+        width: 40%;
+    }
+    h2,
+    h3,
+    p {
+        margin-bottom: 10px;
+    }
+}
 .cart {
     &__top {
         display: flex;
@@ -180,7 +196,11 @@ body {
                 height: 80px;
             }
         }
-
+        // @media (max-width: 760px) {
+        //     &-img {
+        //         visibility: hidden;
+        //     }
+        // }
         &-info {
             display: flex;
             flex-direction: column;
@@ -320,9 +340,10 @@ body {
                 }
 
                 &:hover {
-                    background-color: darken($color: $gray-line, $amount: 90);
-                    border-color: darken($color: $gray-line, $amount: 90);
-
+                    // background-color: darken($color: $gray-line, $amount: 20);
+                    // border-color: darken($color: $gray-line, $amount: 20);
+                    background-color: #4f5d75;
+                    color: #fff;
                     span {
                         color: $gray-line;
                     }
@@ -338,10 +359,15 @@ body {
             }
 
             .pay-btn {
+                background-color: #bfc0c0;
                 font-size: 16px;
                 font-weight: 600;
                 width: 210px;
                 padding: 16px;
+                &:hover {
+                    background-color: #4f5d75;
+                    color: #fff;
+                }
             }
         }
     }

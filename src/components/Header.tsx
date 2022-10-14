@@ -19,11 +19,9 @@ export const Header: React.FC = () => {
     );
 
     useEffect(() => {
-        console.log('use Effect in Header worked');
         if (isMounted.current) {
             const json = JSON.stringify(items);
             localStorage.setItem('items', json);
-            console.log(';json:', json);
         }
         isMounted.current = true;
     }, [items]);
@@ -44,7 +42,7 @@ export const Header: React.FC = () => {
                 <div className='header__cart'>
                     {pathname !== '/cart' && (
                         <Link to='/cart' className='button button--cart'>
-                            <span>{totalPrice}</span>
+                            <span>$ {totalPrice}</span>
                             <div className='button__delimiter'></div>
                             <svg
                                 width='18'

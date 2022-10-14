@@ -33,7 +33,7 @@ export const cartSlice = createSlice({
                 state.items.push({ ...action.payload, count: 1 });
             }
             state.totalPrice = state.items.reduce((sum, obj) => {
-                return obj.price * obj.count + sum;
+                return Number((obj.price * obj.count + sum).toFixed(3));
             }, 0);
         },
         removeItem: (state, action: PayloadAction<string>) => {
@@ -41,7 +41,7 @@ export const cartSlice = createSlice({
                 (item) => item.id !== action.payload
             );
             state.totalPrice = state.items.reduce((sum, obj) => {
-                return obj.price * obj.count + sum;
+                return Number((obj.price * obj.count + sum).toFixed(3));
             }, 0);
         },
         decrementPizzaCount: (state, action: PayloadAction<string>) => {
@@ -52,7 +52,7 @@ export const cartSlice = createSlice({
                 findItem.count--;
             }
             state.totalPrice = state.items.reduce((sum, obj) => {
-                return obj.price * obj.count + sum;
+                return Number((obj.price * obj.count + sum).toFixed(3));
             }, 0);
         },
         clearItems: (state) => {

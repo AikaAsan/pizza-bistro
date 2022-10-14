@@ -117,7 +117,7 @@ export const CartItem: React.FC<CartItemProps> = ({
                 </div>
             </div>
             <div className='cart__item-price'>
-                <b>{price} CAD</b>
+                <b>$ {price}</b>
             </div>
             <div className='cart__item-remove'>
                 <button
