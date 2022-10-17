@@ -189,18 +189,29 @@ body {
             display: flex;
             align-items: center;
             margin-right: 15px;
-            width: 10%;
+            width: 30%;
 
             img {
                 width: 80px;
                 height: 80px;
             }
+            @media (max-width: 760px) {
+                img {
+                    width: 120px;
+                    height: 120px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
         }
-        // @media (max-width: 760px) {
-        //     &-img {
-        //         visibility: hidden;
-        //     }
-        // }
+        @media (max-width: 760px) {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            div {
+                margin-bottom: 10px;
+            }
+        }
         &-info {
             display: flex;
             flex-direction: column;
@@ -225,7 +236,9 @@ body {
             align-items: center;
             justify-content: space-between;
             width: 13%;
-
+            @media (max-width: 760px) {
+                width: 30%;
+            }
             &-minus {
                 svg {
                     path:first-of-type {
@@ -274,7 +287,9 @@ body {
             align-items: center;
             justify-content: flex-end;
             width: 4%;
-
+            @media (max-width: 760px) {
+                width: 10%;
+            }
             .button {
                 border-color: darken($color: $gray-line, $amount: 10);
             }

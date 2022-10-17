@@ -65,7 +65,7 @@ export const CartItem: React.FC<CartItemProps> = ({
             <div className='cart__item-info'>
                 <h3>{title}</h3>
                 <p>
-                    {crustType}, {size}.
+                    {crustType}, {size}in
                 </p>
             </div>
             <div className='cart__item-count'>
@@ -94,7 +94,7 @@ export const CartItem: React.FC<CartItemProps> = ({
                     </svg>
                 </button>
                 <b>{count}</b>
-                <div
+                <button
                     className='button button--outline button--circle cart__item-count-plus'
                     onClick={addItemHandler}
                 >
@@ -114,7 +114,7 @@ export const CartItem: React.FC<CartItemProps> = ({
                             fill='#EB5A1E'
                         />
                     </svg>
-                </div>
+                </button>
             </div>
             <div className='cart__item-price'>
                 <b>$ {price}</b>
