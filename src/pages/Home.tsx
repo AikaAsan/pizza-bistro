@@ -5,12 +5,12 @@ import { useAppDispatch } from '../redux/store';
 import qs from 'qs';
 import {
     setCategoryId,
-    setSortOption,
+    setsortBy,
     setFilters,
     selectFilter,
 } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
-import ActiveSortOptionContext from '../store/ActiveSortOptionContext';
+// import ActivesortByContext from '../store/ActivesortByContext';
 import {
     Categories,
     Sort,
@@ -20,7 +20,7 @@ import {
 } from '../components';
 
 const Home = () => {
-    const { categoryId, sortOption, currentPage } = useSelector(selectFilter);
+    const { categoryId, sortBy, currentPage } = useSelector(selectFilter);
 
     const { searchValue } = useSelector((state: any) => state.search);
     const { pizzas, status } = useSelector(selectPizzaData);
@@ -52,28 +52,30 @@ const Home = () => {
         [dispatch]
     );
 
-    const sortOptionHandler = (sortProperty: string) => {
-        dispatch(setSortOption(sortProperty));
+    const sortByHandler = (sortProperty: string) => {
+        dispatch(setsortBy(sortProperty));
     };
 
     const fetchPizzaHandler = useCallback(async () => {
-        dispatch(fetchPizzas({ category, sortOption, search, currentPage }));
+        dispatch(
+            fetchPizzas({ category, sortBy: sortBy, search, currentPage })
+        );
 
         window.scrollTo(0, 0);
-    }, [category, currentPage, dispatch, search, sortOption]);
+    }, [category, currentPage, dispatch, search, sortBy]);
 
     // if dependecies changed and there was first render
     useEffect(() => {
         if (isMounted.current) {
             const queryString = qs.stringify({
                 categoryId: categoryId,
-                sortOption: sortOption,
+                sortBy: sortBy,
                 currentPage,
             });
             navigate(`?${queryString}`);
         }
         isMounted.current = true;
-    }, [categoryId, sortOption, currentPage, navigate]);
+    }, [categoryId, sortBy, currentPage, navigate]);
 
     // if first render -> we check URL parameters and save them in Redux state
     useEffect(() => {
@@ -85,7 +87,7 @@ const Home = () => {
                     ...params,
                     //maybe dont need it
                     categoryId: 0,
-                    sortOption: '',
+                    sortBy: '',
                     currentPage: 0,
                     searchValue: '',
                 })
@@ -101,25 +103,16 @@ const Home = () => {
             fetchPizzaHandler();
         }
         isSearch.current = false;
-    }, [categoryId, sortOption, searchValue, currentPage, fetchPizzaHandler]);
+    }, [categoryId, sortBy, searchValue, currentPage, fetchPizzaHandler]);
 
     return (
         <div className='container'>
             <div className='content__top'>
-                <ActiveSortOptionContext.Provider
-                    value={{
-                        categoryId,
-                        sortOption,
-                        categoryIdHandler,
-                        sortOptionHandler,
-                    }}
-                >
-                    <Categories
-                        categoryId={categoryId}
-                        categoryIdHandler={categoryIdHandler}
-                    />
-                    <Sort sortOption={sortOption} />
-                </ActiveSortOptionContext.Provider>
+                <Categories
+                    categoryId={categoryId}
+                    categoryIdHandler={categoryIdHandler}
+                />
+                <Sort sortBy={sortBy} />
             </div>
             <h2 className='content__title'>All Pizzas</h2>
             {status === 'error' ? (

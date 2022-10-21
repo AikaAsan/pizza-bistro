@@ -42,6 +42,7 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
             size: sizes[activeCrustSize],
             crustType: crustTypes[activeCrustType],
             count: 0,
+            toppings: '',
         };
         dispatch(addItem(item));
     };

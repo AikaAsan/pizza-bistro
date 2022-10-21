@@ -10,6 +10,7 @@ export type TCartItem = {
     size: string;
     crustType: string;
     count: number;
+    toppings: string;
 };
 
 interface cartSliceState {

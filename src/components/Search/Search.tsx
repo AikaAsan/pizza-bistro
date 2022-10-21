@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setSearchValue } from '../../redux/slices/searchSlice';
 import debounce from 'lodash.debounce';
 import classes from './Search.module.scss';
+import { setCurrentPage } from '../../redux/slices/filterSlice';
 
 export const Search: React.FC = () => {
     // const { searchValue } = useSelector(
@@ -11,7 +12,7 @@ export const Search: React.FC = () => {
 
     // const inputElementRef = useRef(searchValue);
 
-    const [value, setValue] = useState<string>('');
+    const [inputValue, setInputValue] = useState<string>('');
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -20,18 +21,18 @@ export const Search: React.FC = () => {
     const searchInputChangeHandler = useCallback(
         debounce((str: string) => {
             dispatch(setSearchValue(str));
+            dispatch(setCurrentPage(1));
         }, 1000),
         []
     );
 
     const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-       
-        setValue(event.target.value);
+        setInputValue(event.target.value);
         searchInputChangeHandler(event.target.value);
     };
     const clearSearch = () => {
         dispatch(setSearchValue(''));
-        setValue('');
+        setInputValue('');
         inputRef.current?.focus();
     };
     return (
@@ -49,7 +50,7 @@ export const Search: React.FC = () => {
 
             <input
                 className='search__input'
-                value={value}
+                value={inputValue}
                 ref={inputRef}
                 type='text'
                 placeholder='Search pizza'

@@ -1,24 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { setSortOption } from '../redux/slices/filterSlice';
+import { setsortBy } from '../redux/slices/filterSlice';
 
 type PopupClick = MouseEvent & {
     path: Node[];
 };
 
 type SortProps = {
-    sortOption: string;
+    sortBy: string;
 };
-export const Sort: React.FC<SortProps> = React.memo(({ sortOption }) => {
-    const sortOptions: string[] = ['rating', 'price', 'title'];
+export const Sort: React.FC<SortProps> = React.memo(({ sortBy }) => {
+    const sortBys: string[] = ['rating', 'price', 'title'];
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const dispatch = useDispatch();
     const sortElementRef = useRef<HTMLDivElement>(null);
 
-    const onClickSortOption = (sortProperty: string) => {
-        dispatch(setSortOption(sortProperty));
+    const onClicksortBy = (sortProperty: string) => {
+        dispatch(setsortBy(sortProperty));
         setIsOpen(false);
     };
 
@@ -61,21 +61,21 @@ export const Sort: React.FC<SortProps> = React.memo(({ sortOption }) => {
                         return setIsOpen(!isOpen);
                     }}
                 >
-                    {sortOption}
+                    {sortBy}
                 </span>
             </div>
             {isOpen && (
                 <div className='sort__popup'>
                     <ul>
-                        {sortOptions.map((option, index) => {
+                        {sortBys.map((option, index) => {
                             return (
                                 <li
                                     key={index}
                                     className={
-                                        option === sortOption ? 'active' : ''
+                                        option === sortBy ? 'active' : ''
                                     }
                                     onClick={() =>
-                                        onClickSortOption(sortOptions[index])
+                                        onClicksortBy(sortBys[index])
                                     }
                                 >
                                     {option}

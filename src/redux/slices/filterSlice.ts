@@ -3,14 +3,14 @@ import { RootState } from '../store';
 
 interface FilterSliceState {
     categoryId: number;
-    sortOption: string;
+    sortBy: string;
     currentPage: number;
     searchValue: string;
 }
 
 const initialState: FilterSliceState = {
     categoryId: 0,
-    sortOption: 'title',
+    sortBy: 'title',
     currentPage: 1,
     searchValue: '',
 };
@@ -22,8 +22,8 @@ export const filterSlice = createSlice({
         setCategoryId: (state, action: PayloadAction<number>) => {
             state.categoryId = action.payload;
         },
-        setSortOption: (state, action: PayloadAction<string>) => {
-            state.sortOption = action.payload;
+        setsortBy: (state, action: PayloadAction<string>) => {
+            state.sortBy = action.payload;
         },
         setCurrentPage: (state, action: PayloadAction<number>) => {
             state.currentPage = action.payload;
@@ -33,18 +33,18 @@ export const filterSlice = createSlice({
         },
         setFilters: (state, action: PayloadAction<FilterSliceState>) => {
             state.categoryId = Number(action.payload.categoryId);
-            state.sortOption = action.payload.sortOption;
+            state.sortBy = action.payload.sortBy;
             state.currentPage = Number(action.payload.currentPage);
         },
     },
 });
 
 export const selectFilter = (state: RootState) => state.filter;
-export const selectSort = (state: RootState) => state.filter.sortOption;
+export const selectSort = (state: RootState) => state.filter.sortBy;
 
 export const {
     setCategoryId,
-    setSortOption,
+    setsortBy,
     setCurrentPage,
     setSearchValue,
     setFilters,

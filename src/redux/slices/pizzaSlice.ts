@@ -4,16 +4,16 @@ import { RootState } from '../store';
 
 type FetchPizzasArgs = {
     category: string;
-    sortOption: string;
+    sortBy: string;
     search: string;
     currentPage: number;
 };
 export const fetchPizzas = createAsyncThunk<Pizza[], FetchPizzasArgs>(
     'pizza/fetchPizzas',
     async (params) => {
-        const { category, sortOption, search, currentPage } = params;
+        const { category, sortBy, search, currentPage } = params;
 
-        const url = `https://632c9d085568d3cad8897bbb.mockapi.io/items?${category}&sortBy=${sortOption}${search}&page=${currentPage}&limit=4`;
+        const url = `https://632c9d085568d3cad8897bbb.mockapi.io/items?${category}&sortBy=${sortBy}${search}&page=${currentPage}&limit=4`;
 
         const { data } = await axios.get<Pizza[]>(url);
 

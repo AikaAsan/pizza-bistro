@@ -1,28 +1,26 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setCurrentPage } from '../../redux/slices/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFilter, setCurrentPage } from '../../redux/slices/filterSlice';
 import ReactPaginate from 'react-paginate';
 import classes from './Pagination.module.scss';
+
 export const Pagination: React.FC = () => {
     const dispatch = useDispatch();
+    const { currentPage } = useSelector(selectFilter);
     return (
         <ReactPaginate
             previousLabel={'<'}
             nextLabel={'>'}
             breakLabel={'...'}
             breakClassName={'break-me'}
-            pageCount={3}
+            pageCount={4}
             marginPagesDisplayed={1}
-            pageRangeDisplayed={3}
+            pageRangeDisplayed={4}
             onPageChange={(event) =>
                 dispatch(setCurrentPage(event.selected + 1))
             }
+            forcePage={currentPage - 1}
             className={classes.root}
-            // containerClassName={classes.container}
-            // pageClassName={classes.page}
-            // activeLinkClassName={classes.activeLink}
-            // nextClassName={classes.navigation}
-            // previousClassName={classes.navigation}
         />
     );
 };
