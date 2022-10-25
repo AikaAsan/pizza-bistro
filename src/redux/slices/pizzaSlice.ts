@@ -13,7 +13,7 @@ export const fetchPizzas = createAsyncThunk<Pizza[], FetchPizzasArgs>(
     async (params) => {
         const { category, sortBy, search, currentPage } = params;
 
-        const url = `https://632c9d085568d3cad8897bbb.mockapi.io/items?${category}&sortBy=${sortBy}${search}&page=${currentPage}&limit=4`;
+        const url = `https://pizza-bistro-backend.herokuapp.com/?${category}sortBy=${sortBy}${search}&page=${currentPage}`;
 
         const { data } = await axios.get<Pizza[]>(url);
 

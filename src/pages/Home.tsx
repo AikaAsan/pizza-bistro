@@ -10,7 +10,6 @@ import {
     selectFilter,
 } from '../redux/slices/filterSlice';
 import { fetchPizzas, selectPizzaData } from '../redux/slices/pizzaSlice';
-// import ActivesortByContext from '../store/ActivesortByContext';
 import {
     Categories,
     Sort,
@@ -21,7 +20,6 @@ import {
 
 const Home = () => {
     const { categoryId, sortBy, currentPage } = useSelector(selectFilter);
-
     const { searchValue } = useSelector((state: any) => state.search);
     const { pizzas, status } = useSelector(selectPizzaData);
 
@@ -42,7 +40,7 @@ const Home = () => {
         });
     const skeletons = [...Array(6)].map((_, index) => <Skeleton key={index} />);
 
-    const category = categoryId > 0 ? `category=${categoryId}` : '';
+    const category = categoryId > 0 ? `category=${categoryId}&` : '';
     const search = searchValue.length > 0 ? `&search=${searchValue}` : '';
 
     const categoryIdHandler = useCallback(
@@ -65,17 +63,17 @@ const Home = () => {
     }, [category, currentPage, dispatch, search, sortBy]);
 
     // if dependecies changed and there was first render
-    useEffect(() => {
-        if (isMounted.current) {
-            const queryString = qs.stringify({
-                categoryId: categoryId,
-                sortBy: sortBy,
-                currentPage,
-            });
-            navigate(`?${queryString}`);
-        }
-        isMounted.current = true;
-    }, [categoryId, sortBy, currentPage, navigate]);
+    // useEffect(() => {
+    //     if (isMounted.current) {
+    //         const queryString = qs.stringify({
+    //             categoryId: categoryId,
+    //             sortBy: sortBy,
+    //             currentPage,
+    //         });
+    //         navigate(`?${queryString}`);
+    //     }
+    //     isMounted.current = true;
+    // }, [categoryId, sortBy, currentPage, navigate]);
 
     // if first render -> we check URL parameters and save them in Redux state
     useEffect(() => {
