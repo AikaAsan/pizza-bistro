@@ -1,6 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../redux/store';
 import qs from 'qs';
 import {
@@ -24,9 +23,8 @@ const Home = () => {
     const { pizzas, status } = useSelector(selectPizzaData);
 
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
+
     const isSearch = useRef<boolean>(false);
-    const isMounted = useRef<boolean>(false);
 
     const renderedItems = pizzas
         .filter((obj: any) => {
@@ -62,20 +60,7 @@ const Home = () => {
         window.scrollTo(0, 0);
     }, [category, currentPage, dispatch, search, sortBy]);
 
-    // if dependecies changed and there was first render
-    // useEffect(() => {
-    //     if (isMounted.current) {
-    //         const queryString = qs.stringify({
-    //             categoryId: categoryId,
-    //             sortBy: sortBy,
-    //             currentPage,
-    //         });
-    //         navigate(`?${queryString}`);
-    //     }
-    //     isMounted.current = true;
-    // }, [categoryId, sortBy, currentPage, navigate]);
-
-    // if first render -> we check URL parameters and save them in Redux state
+    // if first render ->  check URL parameters and save them in Redux state
     useEffect(() => {
         if (window.location.search) {
             const params = qs.parse(window.location.search.substring(1));
@@ -83,13 +68,12 @@ const Home = () => {
             dispatch(
                 setFilters({
                     ...params,
-                    //maybe dont need it
                     categoryId: 0,
                     sortBy: '',
                     currentPage: 0,
                     searchValue: '',
                 })
-            ); //why I have to do spread
+            );
 
             isSearch.current = true;
         }

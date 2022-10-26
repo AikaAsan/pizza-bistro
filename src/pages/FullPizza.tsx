@@ -45,7 +45,7 @@ const FullPizza: React.FC = () => {
             <h3>$ {pizzaItem.price}</h3>
             <Link to='/'>
                 <button className='button button--outline button--add'>
-                    <span>Назад</span>
+                    <span>Go Back</span>
                 </button>
             </Link>
         </div>

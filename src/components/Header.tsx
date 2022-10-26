@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
-import pizzaLogo from '../assets/img/pizza-logo.svg';
 import cartSvg from '../assets/img/cart.svg';
 import { Search } from '../components';
 import { selectCart } from '../redux/slices/cartSlice';
+import pizzaLogo from '../assets/img/pizza-logo.svg';
 
 export const Header: React.FC = () => {
     const { totalPrice, items } = useSelector(selectCart);
