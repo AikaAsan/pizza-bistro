@@ -15,7 +15,9 @@ import {
     PizzaBlock,
     Skeleton,
     Pagination,
+    // PizzaBuilder,
 } from '../components';
+import PizzaBuilder from '../components/PizzaBuilder/PizzaBuilder';
 
 const Home = () => {
     const { categoryId, sortBy, currentPage } = useSelector(selectFilter);
@@ -94,6 +96,9 @@ const Home = () => {
                     categoryId={categoryId}
                     categoryIdHandler={categoryIdHandler}
                 />
+
+                <PizzaBuilder />
+
                 <Sort sortBy={sortBy} />
             </div>
             <h2 className='content__title'>All Pizzas</h2>

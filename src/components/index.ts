@@ -8,3 +8,4 @@ export * from './Search/Search';
 export * from './Pagination/Pagination';
 export * from './NotFoundBlock/NotFoundBlock';
 export * from './Sort/Sort';
+// export * from './PizzaBuilder/PizzaBuilder';
