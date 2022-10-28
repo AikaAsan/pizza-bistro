@@ -15,7 +15,7 @@ export type TCartItem = {
 
 interface cartSliceState {
     totalPrice: number;
-    items: TCartItem[];
+    cartItems: TCartItem[];
 }
 
 const initialState: cartSliceState = getCartFromLocalStorage();
@@ -24,47 +24,47 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, action: PayloadAction<TCartItem>) => {
-            const findItem = state.items.find(
+            const findItem = state.cartItems.find(
                 (obj) => obj.id === action.payload.id
             );
 
             if (findItem) {
                 findItem.count++;
             } else {
-                state.items.push({ ...action.payload, count: 1 });
+                state.cartItems.push({ ...action.payload, count: 1 });
             }
-            state.totalPrice = state.items.reduce((sum, obj) => {
+            state.totalPrice = state.cartItems.reduce((sum, obj) => {
                 return Number((obj.price * obj.count + sum).toFixed(3));
             }, 0);
         },
         removeItem: (state, action: PayloadAction<string>) => {
-            state.items = state.items.filter(
+            state.cartItems = state.cartItems.filter(
                 (item) => item.id !== action.payload
             );
-            state.totalPrice = state.items.reduce((sum, obj) => {
+            state.totalPrice = state.cartItems.reduce((sum, obj) => {
                 return Number((obj.price * obj.count + sum).toFixed(3));
             }, 0);
         },
         decrementPizzaCount: (state, action: PayloadAction<string>) => {
-            const findItem = state.items.find(
+            const findItem = state.cartItems.find(
                 (obj) => obj.id === action.payload
             );
             if (findItem) {
                 findItem.count--;
             }
-            state.totalPrice = state.items.reduce((sum, obj) => {
+            state.totalPrice = state.cartItems.reduce((sum, obj) => {
                 return Number((obj.price * obj.count + sum).toFixed(3));
             }, 0);
         },
         clearItems: (state) => {
-            state.items = [];
+            state.cartItems = [];
             state.totalPrice = 0;
         },
     },
 });
 export const selectCart = (state: RootState) => state.cart;
 export const selectCartItemById = (id: string) => (state: RootState) =>
-    state.cart.items.find((obj) => obj.id === id);
+    state.cart.cartItems.find((obj) => obj.id === id);
 
 export const { addItem, removeItem, clearItems, decrementPizzaCount } =
     cartSlice.actions;

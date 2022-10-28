@@ -13,7 +13,7 @@ type CartItemProps = {
     title: string;
     price: number;
     imageUrl: string;
-    size: number;
+    size: string;
     crustType: string;
     count: number;
 };
@@ -65,7 +65,7 @@ export const CartItem: React.FC<CartItemProps> = ({
             <div className='cart__item-info'>
                 <h3>{title}</h3>
                 <p>
-                    {crustType}, {size}in
+                    {crustType}, {size}
                 </p>
             </div>
             <div className='cart__item-count'>
