@@ -26,6 +26,8 @@ export const cartSlice = createSlice({
         addItem: (state, action: PayloadAction<TCartItem>) => {
             const findItem = state.cartItems.find(
                 (obj) => obj.id === action.payload.id
+                // obj.title === action.payload.title &&
+                // obj.size === action.payload.size
             );
 
             if (findItem) {
@@ -63,8 +65,12 @@ export const cartSlice = createSlice({
     },
 });
 export const selectCart = (state: RootState) => state.cart;
+
 export const selectCartItemById = (id: string) => (state: RootState) =>
     state.cart.cartItems.find((obj) => obj.id === id);
+// export const selectCartItemByTitle = (title: string) => (state: RootState) =>
+//     state.cart.cartItems.find((obj) => obj.title === title);
+
 
 export const { addItem, removeItem, clearItems, decrementPizzaCount } =
     cartSlice.actions;

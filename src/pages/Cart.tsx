@@ -7,6 +7,7 @@ import { clearItems, selectCart, TCartItem } from '../redux/slices/cartSlice';
 const Cart: React.FC = () => {
     const { totalPrice, cartItems } = useSelector(selectCart);
 
+    console.log('cartItems', cartItems);
     const dispatch = useDispatch();
 
     const clearCartHandler = () => {

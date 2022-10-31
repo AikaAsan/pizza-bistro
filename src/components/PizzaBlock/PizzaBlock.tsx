@@ -10,11 +10,26 @@ import {
 type PizzaBlockProps = {
     id: string;
     title: string;
-    price: number;
+    price: {
+        small: number;
+        medium: number;
+        large: number;
+    };
+
     imageUrl: string;
     sizes: string[];
     types: number[];
 };
+
+// type cartItem = {
+//     title: string;
+//     price: number;
+//     imageUrl: string;
+//     size: string;
+//     crustType: string;
+//     count: number;
+//     toppings: string;
+// };
 const crustTypes: string[] = ['Thin Crust', 'Original'];
 
 export const PizzaBlock: React.FC<PizzaBlockProps> = ({
@@ -28,16 +43,30 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
     const [activeCrustType, setActiveCrustType] = useState(0);
     const [activeCrustSize, setActiveCrustSize] = useState(0);
 
+    const pizzaPriceHandler = () => {
+        if (activeCrustSize === 0) {
+            return price.small;
+        } else if (activeCrustSize === 1) {
+            return price.medium;
+        } else if (activeCrustSize === 2) {
+            return price.large;
+        }
+    };
+    const pizzaPrice: number = pizzaPriceHandler() ?? 0;
     const cartItem = useSelector(selectCartItemById(id));
 
     const addedCount = cartItem ? cartItem.count : 0;
+
+    console.log('addedCount', addedCount);
     const dispatch = useDispatch();
 
     const onClickHandler = () => {
+        // const cartItemId: string = (Math.random() * 100).toString();
+
         const item: TCartItem = {
             id,
             title,
-            price,
+            price: pizzaPrice,
             imageUrl,
             size: sizes[activeCrustSize],
             crustType: crustTypes[activeCrustType],
@@ -95,7 +124,7 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
                     </ul>
                 </div>
                 <div className='pizza-block__bottom'>
-                    <div className='pizza-block__price'> ${price}</div>
+                    <div className='pizza-block__price'> ${pizzaPrice}</div>
                     <button
                         onClick={onClickHandler}
                         className='button button--outline button--add'

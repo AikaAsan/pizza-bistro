@@ -17,6 +17,7 @@ export const fetchPizzas = createAsyncThunk<Pizza[], FetchPizzasArgs>(
 
         const { data } = await axios.get<Pizza[]>(url);
 
+        console.log('data:', data);
         return data;
     }
 );
@@ -24,7 +25,12 @@ export const fetchPizzas = createAsyncThunk<Pizza[], FetchPizzasArgs>(
 type Pizza = {
     id: string;
     title: string;
-    price: number;
+    price: {
+        small: number;
+        medium: number;
+        large: number;
+    };
+
     imageUrl: string;
     sizes: string[];
     types: number[];
