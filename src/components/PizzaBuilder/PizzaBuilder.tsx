@@ -3,7 +3,7 @@ import React from 'react';
 import { Modal } from '../Modal/Modal';
 import { useModal } from '../../hooks/useModal';
 import classes from './PizzaBuilder.module.scss';
-import BuilderContent from '../BuilderContent/PizzaBuilderModal';
+import BuilderContent from '../PizzaBuilderModal/PizzaBuilderModal';
 
 const PizzaBuilder: React.FC = () => {
     const { isShown, toggle } = useModal();

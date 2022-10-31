@@ -1,0 +1,23 @@
+.wrapper {
+    width: 500px;
+    height: 75%;
+}
+
+.image {
+    margin-bottom: 20px;
+}
+
+.content {
+}
+
+.pizzaSizeDiv {
+    display: flex;
+    align-items: row;
+}
+
+.formCheckInput {
+    margin: 10px;
+}
+.formCheckInput[type='radio'] {
+    transform: scale(2);
+}
