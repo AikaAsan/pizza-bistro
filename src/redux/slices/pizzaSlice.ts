@@ -30,7 +30,7 @@ export const fetchPizzas = createAsyncThunk<TData, FetchPizzasArgs>(
     async (params) => {
         const { category, sortBy, search, currentPage } = params;
 
-        const url = `http://localhost:5000/?${category}sortBy=${sortBy}${search}&page=${currentPage}`;
+        const url = `https://pizza-bistro-backend.herokuapp.com/?${category}sortBy=${sortBy}${search}&page=${currentPage}`;
 
         const { data } = await axios.get<TData>(url);
 

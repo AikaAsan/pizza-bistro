@@ -57,7 +57,6 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
 
     const addedCount = cartItem ? cartItem.count : 0;
 
-    console.log('addedCount', addedCount);
     const dispatch = useDispatch();
 
     const onClickHandler = () => {
