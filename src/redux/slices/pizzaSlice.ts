@@ -8,20 +8,6 @@ type FetchPizzasArgs = {
     search: string;
     currentPage: number;
 };
-export const fetchPizzas = createAsyncThunk<Pizza[], FetchPizzasArgs>(
-    'pizza/fetchPizzas',
-    async (params) => {
-        const { category, sortBy, search, currentPage } = params;
-
-        const url = `https://pizza-bistro-backend.herokuapp.com/?${category}sortBy=${sortBy}${search}&page=${currentPage}`;
-
-        const { data } = await axios.get<Pizza[]>(url);
-
-        console.log('data:', data);
-        return data;
-    }
-);
-
 type Pizza = {
     id: string;
     title: string;
@@ -35,6 +21,22 @@ type Pizza = {
     sizes: string[];
     types: number[];
 };
+type TData = {
+    pizzas: Pizza[];
+    totalItems: number;
+};
+export const fetchPizzas = createAsyncThunk<TData, FetchPizzasArgs>(
+    'pizza/fetchPizzas',
+    async (params) => {
+        const { category, sortBy, search, currentPage } = params;
+
+        const url = `http://localhost:5000/?${category}sortBy=${sortBy}${search}&page=${currentPage}`;
+
+        const { data } = await axios.get<TData>(url);
+
+        return data;
+    }
+);
 
 export enum Status {
     LOADING = 'loading',
@@ -44,19 +46,22 @@ export enum Status {
 interface PizzaSliceState {
     pizzas: Pizza[];
     status: Status;
+    totalItems: number;
 }
 
 const initialState: PizzaSliceState = {
     pizzas: [],
     status: Status.LOADING,
+    totalItems: 0,
 };
 
 export const pizzaSlice = createSlice({
     name: 'pizza',
     initialState,
     reducers: {
-        setPizzas: (state, action: PayloadAction<Pizza[]>) => {
-            state.pizzas = action.payload;
+        setPizzas: (state, action: PayloadAction<TData>) => {
+            state.pizzas = action.payload.pizzas;
+            state.totalItems = action.payload.totalItems;
         },
     },
     extraReducers: (builder) => {
@@ -64,9 +69,11 @@ export const pizzaSlice = createSlice({
             .addCase(fetchPizzas.pending, (state) => {
                 state.status = Status.LOADING;
                 state.pizzas = [];
+                state.totalItems = 0;
             })
             .addCase(fetchPizzas.fulfilled, (state, action) => {
-                state.pizzas = action.payload;
+                state.pizzas = action.payload.pizzas;
+                state.totalItems = action.payload.totalItems;
                 state.status = Status.SUCCESS;
             })
             .addCase(fetchPizzas.rejected, (state) => {
