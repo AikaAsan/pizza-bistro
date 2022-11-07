@@ -1,6 +1,6 @@
 ## Pizza-Bistro App
 
-An application that fetches pizza data from mock API. Built with React, TypeScript, Redux Toolkit and CSS modules/SCSS. Functionality to sort, filter by parameters and dynamic search. 
+An application that fetches pizza data from mock API. Built with React, TypeScript, Redux Toolkit and CSS modules/SCSS. 
 
 ## Installation and Setup Instructions
 
