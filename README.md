@@ -19,7 +19,7 @@ localhost:3000/
 
 This project was made to practice my Typescript and React skills as well as learn new ones. Project goals included to practice mainly front end side. Mock-up API is used as a backend to this project. However it appeared that it does not perform as expected when searching data. So I am in process of building my own backend and db for this project. 
 
-UPD: Mock-up API was substituted by backened made with Express.js and MongoDB. 
+UPD: Mock-up API was substituted by backend made with Express.js and MongoDB. 
 github:  https://github.com/AikaAsan/pizza-bistro-backend
 
 The project is still work in progress and several features are being built. Currently I am working on "Build Your Own Pizza" feature. 
