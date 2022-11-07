@@ -34,7 +34,7 @@ At the end of the day, the technologies and practices implemented in this projec
 - Code splitting
 - re render optimization 
 - responsive design. 
--SCSS. Modular CSS
+- SCSS. Modular CSS
 
 
 Take a look at the [deployed version](https://pizza-bistro.vercel.app/)
