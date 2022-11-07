@@ -38,7 +38,7 @@ const Home = () => {
         .map((pizzaItem: any) => {
             return <PizzaBlock {...pizzaItem} key={pizzaItem.id} />;
         });
-    const skeletons = [...Array(6)].map((_, index) => <Skeleton key={index} />);
+    const skeletons = [...Array(4)].map((_, index) => <Skeleton key={index} />);
 
     const category = categoryId > 0 ? `category=${categoryId}&` : '';
     const search = searchValue.length > 0 ? `&search=${searchValue}` : '';
@@ -97,7 +97,7 @@ const Home = () => {
                     categoryIdHandler={categoryIdHandler}
                 />
 
-                {/* <PizzaBuilder /> */}
+                <PizzaBuilder />
 
                 <Sort sortBy={sortBy} />
             </div>
