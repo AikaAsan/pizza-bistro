@@ -22,7 +22,7 @@ This project was made to practice my Typescript and React skills as well as lear
 UPD: Mock-up API was substituted by backend made with Express.js and MongoDB. 
 github:  https://github.com/AikaAsan/pizza-bistro-backend
 
-The project is still work in progress and several features are being built. Currently I am working on "Build Your Own Pizza" feature. 
+The project is still in progress and several features are being built. Currently I am working on "Build Your Own Pizza" feature. 
 
 At the end of the day, the technologies and practices implemented in this project are 
 - TypeScript 
