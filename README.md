@@ -17,7 +17,12 @@ localhost:3000/
 
 ## Reflection
 
-This project was made to practice my Typescript and React skills as well as learn new ones. Project goals included to practice mainly front end side. Mock up Api is used as a backend to this project. However it appeared that it does not perform as expected when searching data. So I am in process of building my own backend and db for this project. 
+This project was made to practice my Typescript and React skills as well as learn new ones. Project goals included to practice mainly front end side. Mock-up API is used as a backend to this project. However it appeared that it does not perform as expected when searching data. So I am in process of building my own backend and db for this project. 
+
+UPD: Mock-up API was substituted by backened made with Express.js and MongoDB. 
+github:  https://github.com/AikaAsan/pizza-bistro-backend
+
+The project is still work in progress and several features are being built. Currently I am working on "Build Your Own Pizza" feature. 
 
 At the end of the day, the technologies and practices implemented in this project are 
 - TypeScript 
@@ -29,6 +34,7 @@ At the end of the day, the technologies and practices implemented in this projec
 - Code splitting
 - re render optimization 
 - responsive design. 
+-SCSS. Modular CSS
 
 
 Take a look at the [deployed version](https://pizza-bistro.vercel.app/)
