@@ -37,19 +37,19 @@ export const CartItem: React.FC<CartItemProps> = ({
     };
     const decrementCount = () => {
         if (count > 1) {
-            dispatch(decrementPizzaCount(id));
+            dispatch(decrementPizzaCount({ id, size, crustType }));
         }
         if (
             count === 1 &&
             window.confirm('Are you sure you want to remove this item? ')
         ) {
-            dispatch(removeItem(id));
+            dispatch(removeItem({ id, size, crustType }));
         }
     };
 
     const removeItemHandler = () => {
         if (window.confirm('Are you sure you want to remove this item? ')) {
-            dispatch(removeItem(id));
+            dispatch(removeItem({ id, size, crustType }));
         }
     };
 

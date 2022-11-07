@@ -102,7 +102,12 @@ const Cart: React.FC = () => {
                 </div>
                 <div className='content__items'>
                     {cartItems.map((cartItem: TCartItem) => {
-                        return <CartItem key={cartItem.id} {...cartItem} />;
+                        return (
+                            <CartItem
+                                key={`${cartItem.id}${cartItem.size}${cartItem.crustType}`}
+                                {...cartItem}
+                            />
+                        );
                     })}
                 </div>
                 <div className='cart__bottom'>

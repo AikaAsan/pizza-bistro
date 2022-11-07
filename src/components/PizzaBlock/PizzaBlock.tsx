@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {
     addItem,
     TCartItem,
-    selectCartItemById,
+    selectCartItems,
 } from '../../redux/slices/cartSlice';
 
 type PizzaBlockProps = {
@@ -53,9 +53,9 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
         }
     };
     const pizzaPrice: number = pizzaPriceHandler() ?? 0;
-    const cartItem = useSelector(selectCartItemById(id));
+    const cartItem = useSelector(selectCartItems(id));
 
-    const addedCount = cartItem ? cartItem.count : 0;
+    const addedCount = cartItem ? cartItem : 0;
 
     const dispatch = useDispatch();
 
@@ -70,7 +70,7 @@ export const PizzaBlock: React.FC<PizzaBlockProps> = ({
             size: sizes[activeCrustSize],
             crustType: crustTypes[activeCrustType],
             count: 0,
-            toppings: '',
+            toppings: [],
         };
         dispatch(addItem(item));
     };
