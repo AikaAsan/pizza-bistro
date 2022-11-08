@@ -41,8 +41,7 @@ const FullPizza: React.FC = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Dolorum, quae quas labore assumenda fugit aperiam molestiae
                 distinctio odio sapiente voluptate!
-            </p>{' '}
-            <h3>$ {pizzaItem.price}</h3>
+            </p>
             <Link to='/'>
                 <button className='button button--outline button--add'>
                     <span>Go Back</span>

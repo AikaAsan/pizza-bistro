@@ -97,7 +97,7 @@ const Home = () => {
                     categoryIdHandler={categoryIdHandler}
                 />
 
-                {/* <PizzaBuilder /> */}
+                <PizzaBuilder />
 
                 <Sort sortBy={sortBy} />
             </div>

@@ -58,7 +58,7 @@ export const Modal: React.FC<ModalProps> = ({
                                 data-dismiss='modal'
                                 aria-label='Close'
                             >
-                                Close
+                                X
                                 {/* <img src={cancelSvg} alt='cancel button' /> */}
                             </button>
                         </div>

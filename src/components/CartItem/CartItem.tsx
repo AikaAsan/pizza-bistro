@@ -16,6 +16,7 @@ type CartItemProps = {
     size: string;
     crustType: string;
     count: number;
+    toppings?: string[];
 };
 export const CartItem: React.FC<CartItemProps> = ({
     id,
@@ -25,6 +26,7 @@ export const CartItem: React.FC<CartItemProps> = ({
     size,
     crustType,
     count,
+    toppings,
 }) => {
     const dispatch = useDispatch();
 

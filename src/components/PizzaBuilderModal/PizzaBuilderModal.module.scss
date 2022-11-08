@@ -1,23 +1,200 @@
+@import '../../scss/_variables.scss';
+
 .wrapper {
-    width: 500px;
-    height: 75%;
-}
-
-.image {
-    margin-bottom: 20px;
-}
-
-.content {
-}
-
-.pizzaSizeDiv {
+    width: 600px;
+    height: 700px;
+    background-color: white;
     display: flex;
-    align-items: row;
 }
 
-.formCheckInput {
-    margin: 10px;
+.image img {
+    width: 270px;
+    height: 100%;
+    object-fit: cover;
 }
-.formCheckInput[type='radio'] {
-    transform: scale(2);
+
+.contentPlaceholder {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.textGroup h2 {
+    font-weight: 700;
+    padding-left: 7px;
+    padding-bottom: 10px;
+}
+
+.textGroup p:nth-child(2) {
+    padding-left: 7px;
+    padding-bottom: 10px;
+    font-weight: 700;
+    color: #4f5d75;
+}
+
+.grayColor {
+    font-weight: 700;
+    color: #8e91a0;
+    padding-left: 7px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.toppingSizesGroup {
+    height: 66%;
+}
+
+.scrollGroup {
+    height: 100%;
+    overflow: visible;
+}
+.sizeContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.sizeContainer button {
+    flex: 1 1 0px;
+    width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid #8e91a0;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px 5px;
+    margin: 5px;
+    cursor: pointer;
+    &:hover {
+        border: 3px solid $orange;
+        padding-top: 0;
+        font-weight: 700;
+    }
+    &.activeButton {
+        border: 3px solid $orange;
+        font-weight: 700;
+    }
+}
+
+.sizeContainer span {
+    color: #8e91a0;
+}
+
+.crustContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.crustContainer span {
+    color: #8e91a0;
+}
+.crustContainer button {
+    flex: 1 1 0px;
+    width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid #8e91a0;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px 5px;
+    margin: 5px;
+    cursor: pointer;
+    &:hover {
+        border: 3px solid $orange;
+        padding-top: 0;
+        font-weight: 700;
+    }
+    &.activeButton {
+        border: 3px solid $orange;
+        font-weight: 700;
+    }
+}
+
+.toppingsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 2px;
+    row-gap: 0px;
+}
+
+.toppingsContainer button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid #8e91a0;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px 5px;
+    margin: 5px;
+    cursor: pointer;
+    &:hover {
+        border: 3px solid $orange;
+        font-weight: 700;
+    }
+    &.activeButton {
+        border: 3px solid $orange;
+        font-weight: 700;
+    }
+}
+.toppingsButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid #8e91a0;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px 5px;
+    margin: 5px;
+    cursor: pointer;
+    &:hover {
+        border: 3px solid $orange;
+        font-weight: 700;
+    }
+    &:active {
+        border: 3px solid orange;
+        font-weight: 700;
+    }
+}
+
+.toppingsButton span {
+    color: #8e91a0;
+}
+button span {
+    color: #8e91a0;
+}
+.addToCartButton {
+    display: flex;
+    justify-content: center;
+}
+.addToCart {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #bfc0c0;
+    color: #4f5d75;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 10px;
+    margin: 5px;
+    width: 70%;
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out;
+
+    &:hover {
+        background-color: #4f5d75;
+        p {
+            color: #fff;
+            font-weight: 700;
+        }
+    }
+}
+
+.addToCart p {
+    color: #4f5d75;
+    font-weight: 700;
 }
