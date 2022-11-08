@@ -32,6 +32,8 @@ export const CartItem: React.FC<CartItemProps> = ({
         dispatch(
             addItem({
                 id,
+                size,
+                crustType,
             } as TCartItem)
         );
     };
