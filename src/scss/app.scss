@@ -64,8 +64,15 @@ body {
             }
         }
         @media (max-width: 760px) {
+            
             .categories {
+                overflow: hidden;
+
                 ul {
+                    display: flex;
+                    // align-items: center;
+                    justify-content: center;
+                    // align-content: center;
                     li {
                         padding: 8px 20px;
                     }

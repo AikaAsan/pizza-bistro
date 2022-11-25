@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { RootState } from '../store';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
+import { RootState } from "../store";
 
 type FetchPizzasArgs = {
     category: string;
@@ -26,11 +26,11 @@ type TData = {
     totalItems: number;
 };
 export const fetchPizzas = createAsyncThunk<TData, FetchPizzasArgs>(
-    'pizza/fetchPizzas',
+    "pizza/fetchPizzas",
     async (params) => {
         const { category, sortBy, search, currentPage } = params;
 
-        const url = `https://pizza-bistro-backend.herokuapp.com/?${category}sortBy=${sortBy}${search}&page=${currentPage}`;
+        const url = `https://pizza-bistro-backend.onrender.com/?${category}sortBy=${sortBy}${search}&page=${currentPage}`;
 
         const { data } = await axios.get<TData>(url);
 
@@ -39,9 +39,9 @@ export const fetchPizzas = createAsyncThunk<TData, FetchPizzasArgs>(
 );
 
 export enum Status {
-    LOADING = 'loading',
-    SUCCESS = 'success',
-    ERROR = 'error',
+    LOADING = "loading",
+    SUCCESS = "success",
+    ERROR = "error",
 }
 interface PizzaSliceState {
     pizzas: Pizza[];
@@ -56,7 +56,7 @@ const initialState: PizzaSliceState = {
 };
 
 export const pizzaSlice = createSlice({
-    name: 'pizza',
+    name: "pizza",
     initialState,
     reducers: {
         setPizzas: (state, action: PayloadAction<TData>) => {
@@ -82,8 +82,6 @@ export const pizzaSlice = createSlice({
             });
     },
 });
-
-
 
 export const selectPizzaData = (state: RootState) => state.pizza;
 export const { setPizzas } = pizzaSlice.actions;
