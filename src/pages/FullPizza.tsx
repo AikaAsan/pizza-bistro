@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
-import axios from 'axios';
+import axios from "axios";
 
 const FullPizza: React.FC = () => {
     const [pizzaItem, setPizzaItem] = useState<{
@@ -17,12 +17,12 @@ const FullPizza: React.FC = () => {
         async function fetchPizzaItem() {
             try {
                 const { data } = await axios.get(
-                    `https://pizza-bistro-backend.herokuapp.com/pizza/` + id
+                    `https://pizza-bistro-backend.onrender.com/pizza/${id}`
                 );
                 setPizzaItem(data);
             } catch (error) {
-                alert('something went wrong');
-                navigate('/');
+                alert("something went wrong");
+                navigate("/");
             }
         }
         fetchPizzaItem();
@@ -33,8 +33,8 @@ const FullPizza: React.FC = () => {
     }
 
     return (
-        <div className='full-pizza'>
-            {' '}
+        <div className="full-pizza">
+            {" "}
             <img src={pizzaItem.imageUrl} alt={pizzaItem.title} />
             <h2>{pizzaItem.title} pizza</h2>
             <p>
@@ -42,8 +42,8 @@ const FullPizza: React.FC = () => {
                 Dolorum, quae quas labore assumenda fugit aperiam molestiae
                 distinctio odio sapiente voluptate!
             </p>
-            <Link to='/'>
-                <button className='button button--outline button--add'>
+            <Link to="/">
+                <button className="button button--outline button--add">
                     <span>Go Back</span>
                 </button>
             </Link>
