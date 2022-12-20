@@ -30,7 +30,7 @@ export const fetchPizzas = createAsyncThunk<TData, FetchPizzasArgs>(
     async (params) => {
         const { category, sortBy, search, currentPage } = params;
 
-        const url = `https://pizza-bistro-backend.onrender.com/?${category}sortBy=${sortBy}${search}&page=${currentPage}`;
+        const url = `${process.env.REACT_APP_BACKEND_URI}/?${category}sortBy=${sortBy}${search}&page=${currentPage}`;
 
         const { data } = await axios.get<TData>(url);
 

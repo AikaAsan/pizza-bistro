@@ -17,7 +17,7 @@ const FullPizza: React.FC = () => {
         async function fetchPizzaItem() {
             try {
                 const { data } = await axios.get(
-                    `https://pizza-bistro-backend.onrender.com/pizza/${id}`
+                    `${process.env.REACT_APP_BACKEND_URI}/pizza/${id}`
                 );
                 setPizzaItem(data);
             } catch (error) {
