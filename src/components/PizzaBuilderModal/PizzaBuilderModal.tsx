@@ -4,7 +4,7 @@ import { addItem, TCartItem } from '../../redux/slices/cartSlice';
 import classes from './PizzaBuilderModal.module.scss';
 import pizzaPicture from '../../assets/img/pexels-polina-tankilevitch-pizza.jpeg';
 
-const PizzaBuilderModal: React.FC = () => {
+export const PizzaBuilderModal: React.FC = () => {
     const pizzaSizes = [
         { size: 'Small', price: 15.99 },
         { size: 'Medium', price: 16.99 },
@@ -228,5 +228,3 @@ const PizzaBuilderModal: React.FC = () => {
         </div>
     );
 };
-
-export default PizzaBuilderModal;

@@ -15,9 +15,8 @@ import {
     PizzaBlock,
     Skeleton,
     Pagination,
-    // PizzaBuilder,
+    PizzaBuilder,
 } from '../components';
-import PizzaBuilder from '../components/PizzaBuilder/PizzaBuilder';
 
 const Home = () => {
     const { categoryId, sortBy, currentPage } = useSelector(selectFilter);

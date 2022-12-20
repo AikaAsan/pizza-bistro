@@ -1,11 +1,10 @@
 import React from 'react';
-
 import { Modal } from '../Modal/Modal';
 import { useModal } from '../../hooks/useModal';
 import classes from './PizzaBuilder.module.scss';
-import PizzaBuilderModal from '../PizzaBuilderModal/PizzaBuilderModal';
+import { PizzaBuilderModal } from '../../components';
 
-const PizzaBuilder: React.FC = () => {
+export const PizzaBuilder: React.FC = () => {
     const { isShown, toggle } = useModal();
     return (
         <>
@@ -21,5 +20,3 @@ const PizzaBuilder: React.FC = () => {
         </>
     );
 };
-
-export default PizzaBuilder;
