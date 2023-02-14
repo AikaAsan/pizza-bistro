@@ -95,20 +95,21 @@ export const PizzaBuilderModal: React.FC = () => {
             <div className={classes.image}>
                 <img src={pizzaPicture} alt='pizza' />
             </div>
-            <div className={classes.contentPlaceholder}>
-                <div className={classes.textGroup}>
-                    <p className={classes.grayColor}>
-                        Create your own pizza by choosing a crust, sauce and
-                        toppings! Select from three crust sizes & thincknesses,
-                        choice of sauce over 10 individual toppings
-                    </p>
-                    <p>
-                        Pizza comes with Cheese already and you can select the
-                        rest of your Toppings.
-                    </p>
-                </div>
-                <div className={classes.toppingSizesGroup}>
-                    <div className={classes.scrollGroup}>
+            <div className={classes.scrollGroup}>
+                <div className={classes.contentPlaceholder}>
+                    <div className={classes.textGroup}>
+                        <p className={classes.grayColor}>
+                            Create your own pizza by choosing a crust, sauce and
+                            toppings! Select from three crust sizes &
+                            thincknesses, choice of sauce over 10 individual
+                            toppings
+                        </p>
+                        <p>
+                            Pizza comes with Cheese already and you can select
+                            the rest of your Toppings.
+                        </p>
+                    </div>
+                    <div className={classes.toppingSizesGroup}>
                         <div className={classes.size}>
                             <p className={classes.grayColor}>Size</p>
                             <div className={classes.sizeContainer}>
@@ -213,15 +214,15 @@ export const PizzaBuilderModal: React.FC = () => {
                                 ))}
                             </div>
                         </div>
-                        <div className={classes.addToCartButton}>
-                            <button
-                                className={classes.addToCart}
-                                onClick={addToCartHandler}
-                            >
-                                <p>Add To Cart</p>
-                                <p>${pizzaPrice}</p>
-                            </button>
-                        </div>
+                    </div>
+                    <div className={classes.addToCartButton}>
+                        <button
+                            className={classes.addToCart}
+                            onClick={addToCartHandler}
+                        >
+                            <p>Add To Cart</p>
+                            <p>${pizzaPrice}</p>
+                        </button>
                     </div>
                 </div>
             </div>
